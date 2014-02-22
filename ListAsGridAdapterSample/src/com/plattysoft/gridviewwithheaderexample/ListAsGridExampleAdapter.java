@@ -1,6 +1,8 @@
 package com.plattysoft.gridviewwithheaderexample;
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +16,8 @@ import com.plattysoft.ui.ListAsGridBaseAdapter;
  */
 public class ListAsGridExampleAdapter extends ListAsGridBaseAdapter {
 
-	Integer[] mArray = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
-
+	ArrayList<Integer> mArray = new ArrayList<Integer>();
+	
 	private LayoutInflater mInflater;
 
 	public ListAsGridExampleAdapter(Context context) {
@@ -25,7 +27,7 @@ public class ListAsGridExampleAdapter extends ListAsGridBaseAdapter {
 
 	@Override
 	public Integer getItem(int position) {
-		return mArray[position];
+		return mArray.get(position);
 	}
 
 	@Override
@@ -35,7 +37,11 @@ public class ListAsGridExampleAdapter extends ListAsGridBaseAdapter {
 
 	@Override
 	public int getItemCount() {
-		return mArray.length;
+		return mArray.size();
+	}
+	
+	public void addItem(Integer i) {
+		mArray.add(i);
 	}
 
 	@Override
