@@ -107,8 +107,7 @@ public abstract class ListAsGridBaseAdapter extends BaseAdapter {
 			if (currentPos < getItemCount()) {            		
 				insideView = getItemView(currentPos, null, viewGroup);            	
 				insideView.setVisibility(View.VISIBLE);
-				View theView = getItemView(currentPos, insideView, viewGroup);
-				theView.setOnClickListener(new ListItemClickListener (currentPos));				
+				insideView.setOnClickListener(new ListItemClickListener (currentPos));				
 			}
 			else {
 				insideView = new View(mContext);
