@@ -1,18 +1,21 @@
 package com.plattysoft.gridviewwithheaderexample;
 
 import com.plattysoft.ui.GridItemClickListener;
+import com.plattysoft.ui.ListAsGridAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements GridItemClickListener, OnScrollListener {
 
-	private ListAsGridExampleAdapter mAdapter;
+	private ArrayAdapter<Integer> mRealAdapter;
+	private ListAsGridAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,8 @@ public class MainActivity extends Activity implements GridItemClickListener, OnS
 		View footer = View.inflate(getBaseContext(), R.layout.sample_footer, null);
 		listView.addFooterView(footer);
 
-		mAdapter = new ListAsGridExampleAdapter(this);
+		mRealAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1);
+		mAdapter = new ListAsGridAdapter(this, mRealAdapter);
 		mAdapter.setNumColumns(3);
 		mAdapter.setBackgroundResource(R.drawable.row);
 		mAdapter.setOnGridClickListener(this);
@@ -32,23 +36,23 @@ public class MainActivity extends Activity implements GridItemClickListener, OnS
 		listView.setOnScrollListener(this);
 		
 		for (int i = 0; i < 50; i++) {
-			mAdapter.addItem(i);
+			mRealAdapter.add(i);
 		}
-		mAdapter.notifyDataSetChanged();
+		mRealAdapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onGridItemClicked(View v, int position, long itemId) {
-		Toast.makeText(this, "Item clicked: "+mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Item clicked: "+mRealAdapter.getItem(position), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (firstVisibleItem + visibleItemCount >= totalItemCount) {
 			for (int i = 0; i < 50; i++) {
-				mAdapter.addItem(i);
+				mRealAdapter.add(i);
 			}
-			mAdapter.notifyDataSetChanged();
+			mRealAdapter.notifyDataSetChanged();
 		}
 	}
 
