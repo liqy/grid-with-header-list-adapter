@@ -15,7 +15,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements GridItemClickListener, OnScrollListener {
 
 	private ArrayAdapter<Integer> mRealAdapter;
-	private ListAsGridAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +27,11 @@ public class MainActivity extends Activity implements GridItemClickListener, OnS
 		listView.addFooterView(footer);
 
 		mRealAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1);
-		mAdapter = new ListAsGridAdapter(this, mRealAdapter);
-		mAdapter.setNumColumns(3);
-		mAdapter.setBackgroundResource(R.drawable.row);
-		mAdapter.setOnGridClickListener(this);
-		listView.setAdapter (mAdapter);
+		ListAsGridAdapter adapter = new ListAsGridAdapter(this, mRealAdapter);
+		adapter.setNumColumns(3);
+		adapter.setBackgroundResource(R.drawable.row);
+		adapter.setOnGridClickListener(this);
+		listView.setAdapter (adapter);
 		listView.setOnScrollListener(this);
 		
 		for (int i = 0; i < 50; i++) {
