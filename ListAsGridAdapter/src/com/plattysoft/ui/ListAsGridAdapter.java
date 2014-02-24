@@ -118,7 +118,7 @@ public class ListAsGridAdapter implements ListAdapter {
 			if (currentPos < getItemCount()) {
 				View itemView = getItemView(currentPos, null, viewGroup);
 				itemView.setVisibility(View.VISIBLE);
-				itemView.setOnClickListener(new ListItemClickListener(
+				insideView.setOnClickListener(new ListItemClickListener(
 						currentPos));
 				insideView.addView(itemView);
 			}
@@ -154,7 +154,7 @@ public class ListAsGridAdapter implements ListAdapter {
 				View itemView = insideView.getChildAt(0);
 				// Populate the view
 				View theView = getItemView(currentPos, itemView, viewGroup);
-				theView.setOnClickListener(new ListItemClickListener(currentPos));
+				insideView.setOnClickListener(new ListItemClickListener(currentPos));
 				if (itemView == null) {
 					insideView.addView(theView);
 				}
